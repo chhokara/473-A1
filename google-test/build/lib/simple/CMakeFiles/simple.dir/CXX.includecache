@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/simple/include/Awards.h
+string
+-
+
+../lib/simple/include/Matthews.h
+cstdint
+-
+
+../lib/simple/include/Parallelogram.h
+stdint.h
+-
+
+/home/aschhoka/Documents/473-A1/473-exercise-1/lib/simple/Awards.cpp
+Awards.h
+/home/aschhoka/Documents/473-A1/473-exercise-1/lib/simple/Awards.h
+
+/home/aschhoka/Documents/473-A1/473-exercise-1/lib/simple/Matthews.cpp
+Matthews.h
+/home/aschhoka/Documents/473-A1/473-exercise-1/lib/simple/Matthews.h
+
+/home/aschhoka/Documents/473-A1/473-exercise-1/lib/simple/Parallelogram.cpp
+cassert
+-
+cmath
+-
+Parallelogram.h
+/home/aschhoka/Documents/473-A1/473-exercise-1/lib/simple/Parallelogram.h
+
