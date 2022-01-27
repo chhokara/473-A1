@@ -60,7 +60,7 @@ def test_nonsecret_scenario():
     assert response_name == "Arsh"
     assert response_food == "Sushi"
 
-    # should return empty list since there is not secret button
+    # should return empty list since there is no secret button
     secret_button = driver.find_elements_by_id('secretButton')
     assert not secret_button
 
@@ -68,4 +68,47 @@ def test_nonsecret_scenario():
 
 
 # You may want to add additional tests....
+def test_secret_scenario():
+    landing_page = get_landing_page_url()
+    driver = construct_headless_chrome_driver()
+
+    # You can place additional test code here to drive this one test
+    driver.get(landing_page)
+    name = driver.find_element_by_id('preferredname')
+    food = driver.find_element_by_id('food')
+    password = driver.find_element_by_id('secret')
+    submit = driver.find_element_by_id('submit')
+
+    name.send_keys("Arsh")
+    food.send_keys("Sushi")
+    password.send_keys("magic")
+    submit.click()
+
+    wait_for_page_load(driver)
+
+    assert 'response.html' in driver.current_url 
+
+    response_name = driver.find_element_by_id('thankname').text
+    response_food = driver.find_element_by_id('foodploy').text
+
+    assert response_name == "Arsh"
+    assert response_food == "Sushi"
+
+    secret_button = driver.find_element_by_id('secretButton')
+    # This page should have a secret button
+    assert secret_button
+
+    secret_button.click()
+
+    WebDriverWait(driver, 3).until( staleness_of(secret_button) )
+
+    assert 'secret.html' in driver.current_url
+
+    secret_name = driver.find_element_by_id('thankname').text
+    secret_password = driver.find_element_by_id('secret').text
+
+    assert secret_name == "Arsh"
+    assert secret_password == "magic"
+
+    driver.quit()
 
